@@ -5,18 +5,22 @@ df = pd.read_csv('USA_Housing.csv', delimiter = ',', encoding='UTF-8')
 #Estas son las columnas que tiene nuestro csv
 print('-------------Columnas del csv-----------')
 print(df.columns)
+print('\n')
+
 #Vamos a traducir las columnas, es decir, vamos a cambiar sus nombres para que nos sea más fácil trabajar con ellas
 print('--------------Traducción de las columnas----------------')
 df.rename(columns= {'Price': 'precio', 'Address': 'direccion', 'Avg. Area Income': 'media salario', 'Avg. Area House Age':
     'media antugüedad casas', 'Avg. Area Number of Rooms': 'media número habitaciones', 'Avg. Area Number of Bedrooms': 'media número dormitorios por casa', 'Area Population':'población'}, inplace=True)
 print(df.columns)
 
+print('\n')
 print('------------Datos del csv-------------')
 print(df.head()) 
 print(df.tail())
 '''Se usa para poder ver las primeras filas de nuestros datos y ver los distintos valores que tenemos asociados a las columnas. 
 Lo mismo con el .tail(), lo único que nos mostrará las últimas filas. Podemos usar ambos para ver los datos, aunque es más común el .head()'''
 
+print('\n')
 print('----------Descripción e información del csv----------------')
 print(df.describe())
 print(df.info())
@@ -28,7 +32,7 @@ Nos lo realiza de cada columna de manera individual, lo cual es bastante útil p
 El .info(), nos mostrará en una columna la descripción básica de los datos, es decir, el tipo (float, integrer, string, etc.),
 el número de valores de cada columna y si son nulos.
 '''
-
+print('\n')
 print('----------Clasificación de las variables--------------')
 print('Variables categóricas: dirección')
 print('Variables numéricas: precio, media salario, media antugüedad casas, media número habitaciones,media número dormitorios por casa, población')
@@ -39,3 +43,4 @@ Si nos fijamos en lo que nos ha mostrado .info(), aquí podemos ver que direcci�
 los datos de dicha columna vemos con claridad que tiene que ir en la parte categórica, al ser una indentificación del lugar.
 Las variables numéricas son datos numéricos, como integrers, float, etc.
 '''
+
