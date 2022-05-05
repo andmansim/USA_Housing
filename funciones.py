@@ -66,3 +66,19 @@ La función nos sirve para poder mostrar y comparar las variables que son categ�
 pero al solo tener una, no la podemos comparar non ninguna otra. Por eso esta función no 
 se usará en este fichero.
 '''
+
+print('\n')
+print('------------Análisis de las variables numéricas----------------')
+#Agrupamos las varibles para saber si hay algún dato repetido
+def plot_hist(variable):
+    plt.figure(figsize = (9,3))
+    plt.hist(df[variable], bins=30) #Histograma
+    plt.xlabel(variable)
+    plt.ylabel("Frecuencia")
+    plt.title("Distribución variable {} con histograma".format(variable))
+    plt.show()
+
+numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
+for n in numericVar:
+  plot_hist(n)
+  
