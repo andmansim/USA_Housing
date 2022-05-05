@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 #Leemos el csv
 df = pd.read_csv('USA_Housing.csv', delimiter = ',', encoding='UTF-8')
@@ -44,3 +46,23 @@ los datos de dicha columna vemos con claridad que tiene que ir en la parte categ
 Las variables numéricas son datos numéricos, como integrers, float, etc.
 '''
 
+print('\n')
+print('------------Análisis de las variables categóricas----------------')
+def bar_plt(variable):
+    var = df[variable]
+    varValue = var.value_counts() #nos va a contar los datos en función de cada columna
+    
+    plt.figure(figsize=(9, 3)) #tamaño de la ventana
+    plt.bar(varValue.index, varValue) #Es un diagrama de barras
+    plt.xticks(varValue.index, varValue.index.values) #etiquetas
+    plt.ylabel('Frecuencia')
+    plt.tittle(variable)
+    plt.show()
+    
+    print("{}:\n{}".format(variable, varValue))
+    
+'''
+La función nos sirve para poder mostrar y comparar las variables que son categóricas, 
+pero al solo tener una, no la podemos comparar non ninguna otra. Por eso esta función no 
+se usará en este fichero.
+'''
