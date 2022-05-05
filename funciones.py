@@ -22,5 +22,9 @@ print(df.describe())
 print(df.info())
 '''
 El .describe(), no enseña en una columna los datos más relevantes que necesitamos saber sobre este DataSet, incluye 
-la media, la desviación típica, los cuartiles uno, dos y tres, el mínimo, el máximo
+la media, la desviación típica, los cuartiles uno, dos y tres, el mínimo, el máximo y la cantidad de datos que tenemos. 
+Nos lo realiza de cada columna de manera individual, lo cual es bastante útil para hacer una comparativa entre ellas.
+
+El .info(), nos mostrará en una columna la descripción básica de los datos, es decir, el tipo (float, integrer, string, etc.),
+el número de valores de cada columna y si son nulos.
 '''
