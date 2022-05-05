@@ -28,3 +28,14 @@ Nos lo realiza de cada columna de manera individual, lo cual es bastante útil p
 El .info(), nos mostrará en una columna la descripción básica de los datos, es decir, el tipo (float, integrer, string, etc.),
 el número de valores de cada columna y si son nulos.
 '''
+
+print('----------Clasificación de las variables--------------')
+print('Variables categóricas: dirección')
+print('Variables numéricas: precio, media salario, media antugüedad casas, media número habitaciones,media número dormitorios por casa, población')
+'''
+Esta clasificación la haremos basándonos en la información que nos ha dado el .info().
+Las variables categóricas son todas aquellas que no son numéricas, es decir, que nos dan una descripción mediante palabras o símbolos.
+Si nos fijamos en lo que nos ha mostrado .info(), aquí podemos ver que dirección lo ha reconocido como un objeto, donde nos cabría la duda de si es un objeto numérico o no. Al ver
+los datos de dicha columna vemos con claridad que tiene que ir en la parte categórica, al ser una indentificación del lugar.
+Las variables numéricas son datos numéricos, como integrers, float, etc.
+'''
