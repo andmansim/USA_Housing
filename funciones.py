@@ -76,6 +76,41 @@ def calculomedia(variable):
 def calculovarianza(variable, media):
     v = ((df[variable] - media)**2).sum()/(df[variable].count())
     return v
+def calculomediana(variable):
+    centro = df[variable].count()/2
+    ordenar =  df[variable].sort_values() 
+    print(ordenar)
+    par = False
+    if (df[variable].count() % 2==0):
+        par = True
+    if par:
+        centro = int(round(centro, 0))
+        valor1 = ordenar.iloc[centro, 0]
+        valor2 = ordenar.iloc[centro - 1, 0]
+        mediana = (valor1 + valor2)/2
+    else: 
+        posi_mediana = int((ordenar[variable].count() + 1)/2)
+        mediana = ordenar.iloc[posi_mediana - 1, 0]
+    return mediana
+    
+def calculocuartiles(variable, mediana):
+    ordenar = df[variable].sort_values() 
+    q2 = mediana
+    par = False
+    if (ordenar[variable].count()%2 ==0):
+        par = True
+    if par:
+        q1 = int(ordenar[variable].count()/4)
+        q3 = int((ordenar[variable].count() * 3)/ 4)
+    else:
+        q1 = int((ordenar[variable].count() + 1)/4)
+        q3 = int(((ordenar[variable].count()+ 1) * 3)/ 4) 
+    
+    Q1 = ordenar.iloc[q1 - 1, 0]
+    Q3 = ordenar.iloc[q3 - 1, 0]
+
+    return [Q1, q2, Q3]
+        
 '''
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
 y nos proporcione más información
@@ -124,16 +159,6 @@ tamaño de algunas agrupaciones de datos.
 
 '''
 
-numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
-for n in numericVar:
-    media = round(calculomedia(n), 2)
-    varianza = round(calculovarianza(n, media), 2)
-    desviacion_tip = round((varianza**(1/2)), 2)
-    print(desviacion_tip)
-    print(df[n].describe())
-    print('\n')
-    histograma( n, media, desviacion_tip, varianza)
-
 
 #valores atípicos
 def criterioDeTukey(variable, primerCuartil, tercerCuartil):
@@ -156,3 +181,15 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
     valoresAberrantes = valoresAberrantesInferiores + valoresAberrantesSuperiores
 
     return (valoresAberrantes)
+
+numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
+for n in numericVar:
+    media = round(calculomedia(n), 2)
+    varianza = round(calculovarianza(n, media), 2)
+    desviacion_tip = round((varianza**(1/2)), 2)
+    mediana = round(calculomediana(n), 2)
+    cuartil = calculocuartiles(n, mediana)
+    atipicos = criterioDeTukey(n, cuartil[0], cuartil[2])
+    histograma( n, media, desviacion_tip, varianza)
+    
+    
