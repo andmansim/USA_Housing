@@ -81,9 +81,8 @@ def calculovarianza(variable, media):
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
 y nos proporcione más información
 '''
-def histograma(variable, media, desviacion_tipica, varianza):
-    min = df[variable].min()
-    max = df[variable].max()
+def histograma(variable, media, desviacion_tipica, varianza, min, max):
+
     if media < 10:
         a = 0.01
     else:
@@ -155,6 +154,8 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
 
 numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
+    min = df[n].min()
+    max = df[n].max()
     media = round(calculomedia(n), 2)
     varianza = round(calculovarianza(n, media), 2)
     desviacion_tip = round((varianza**(1/2)), 2)
@@ -164,33 +165,51 @@ for n in numericVar:
     atipicos = criterioDeTukey(n, q1, q3)
     #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
     print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
-    #histograma( n, media, desviacion_tip, varianza)
+    #histograma( n, media, desviacion_tip, varianza, min, max)
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, población-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
+    min = df[variable1].min()
+    max = df[variable1].max()
     q1_v1 = np.percentile(df[variable1], 25)
     q2_v1 = np.percentile(df[variable1], 50)
     q3_v1 = np.percentile(df[variable1], 75)
+    q1_v2 = np.percentile(df[variable2], 25)
+    q2_v2 = np.percentile(df[variable2], 50)
+    q3_v2 = np.percentile(df[variable2], 75)
     fig, ax1 = plt.subplots()
     l1 = []
     l2 = []
     l4 = []
     l5 = []
+    r1 = []
+    r2 = []
+    r3 = []
+    r4 = []
     for i in df[variable1]:
-        if i < q1:
+        if i < q1_v1:
             l1.append(i)
-        if q1 < i < media:
+        if q1_v1 < i <  q2_v1:
             l2.append(i)
-        if  q2 < i < q3:
+        if   q2_v1 < i < q3_v1:
             l4.append(i)
-        if i> q3:
+        if i> q3_v1:
             l5.append(i)
-    print(l1)
-    print(l2)
-    
-    ax1.plot(l1, color='black', linewidth=3)
-    #ax2 = ax1.twinx()
-    #ax2.plot(df[variable2], color='red', linewidth=3 )
+    for j in df[variable2]:
+        if i < q1_v2:
+            r1.append(j)
+        if q1_v2 < i <  q2_v2:
+            r2.append(j)
+        if   q2_v2 < i < q3_v2:
+            r3.append(j)
+        if j> q3_v2:
+            r4.append(j)
+    #ax1.plot(l1[0:len(l1):1000] + l2[0:len(l2):1000] + l4[0:len(l4):1000] + l5[0:len(l5):1000], color='yellow', linewidth=3)
+    ax1.plot(df[variable1][min:max:1000], color='yellow', linewidth=3)
+    ax1.set_ylabel('precio', color= 'yellow')
+    ax2 = ax1.twinx()
+    ax2.plot(r1[0:len(r1):200] + r2[0:len(r2):200] + r3[0:len(r3):200] + r4[0:len(r4):200], color='blue', linewidth=3 )
+    ax2.set_ylabel('media antigüedad casas', color= 'blue')
     plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
     plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
     plt.show()
