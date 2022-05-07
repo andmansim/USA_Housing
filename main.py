@@ -1,4 +1,7 @@
 from funciones import*
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
 if __name__ =='__main__':
     #Leemos el csv
@@ -7,7 +10,7 @@ if __name__ =='__main__':
     print('-------------Columnas del csv-----------')
     print(df.columns)
     print('\n')
-
+    
     #Vamos a traducir las columnas, es decir, vamos a cambiar sus nombres para que nos sea más fácil trabajar con ellas
     print('--------------Traducción de las columnas----------------')
     df.rename(columns= {'Price': 'precio', 'Address': 'direccion', 'Avg. Area Income': 'media-salario', 'Avg. Area House Age':
@@ -62,10 +65,12 @@ if __name__ =='__main__':
     
     numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
     print('------------Análisis de las variables numéricas----------------')
+    
+    
+    
     for n in numericVar:
         min = df[n].min()
         max = df[n].max()
-        
         media = round(calculomedia(df, n), 2)
         varianza = round(calculovarianza(df, n, media), 2)
         desviacion_tip = round((varianza**(1/2)), 2)
@@ -109,4 +114,7 @@ if __name__ =='__main__':
 
         '''
     
+    
+    print('\n')
     graficas(df)
+    
