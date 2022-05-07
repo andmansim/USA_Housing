@@ -81,6 +81,10 @@ def calculovarianza(variable, media):
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
 y nos proporcione más información
 '''
+print('-----------Identificar valores nulos-----------')
+nulos = df.isnull().sum()
+print(nulos)
+
 def histograma(variable, media, desviacion_tipica, varianza, min, max):
 
     if media < 10:
@@ -163,39 +167,12 @@ for n in numericVar:
     q2 = np.percentile(df[n], 50)
     q3 = np.percentile(df[n], 75)
     atipicos = criterioDeTukey(n, q1, q3)
-    print(n)
-    print(df[n].describe())
     #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
     print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
     histograma( n, media, desviacion_tip, varianza, min, max)
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, poblacion-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
+    pass
 
-    '''l = []
-    r = []
-    for e in df[variable1]:
-        l.append(e)
-    for q in df[variable2]:
-        r.append(q)
-    fig, ax1 = plt.subplots()
-    
-    ax1.plot(l[0:len(l):200], color='orange', linewidth=3)
-    ax1.set_ylabel(variable1, color= 'orange')
-    ax2 = ax1.twinx()
-    
-    ax2.plot(r[0:len(r):200], color='blue', linewidth=3 )
-    ax2.set_ylabel(variable2, color= 'blue')
-    plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
-    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
-    plt.show()'''
-    '''fig, ax= plt.subplots()
-    ax.scatter(df[variable2], df[variable1])
-    ax.set_ylabel(variable1)
-    ax.set_xlabel(variable2)
-    plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
-    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')'''
 
-#graficas('precio', 'media-antigüedad-casa')
-#graficas('precio', 'media-numero-habitaciones')
-#graficas('poblacion', 'precio')
