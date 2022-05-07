@@ -104,7 +104,23 @@ es decir, se asemeja a la campana de Gauss. Los gráficos que hemos podido ver e
 El resto de valores, salvo la media antigüedad casas y media número dormitorios por casa, presenta simetría pero no 
 la suficiente como para llegar a considerarse una campana de Gauss.
 
+Ahora vamos a analizar las variables de manera individual, viendo algunas caracteríaticas de ellas:
+1º Precio: Su distribución encaja con la campana de Gauss, salvo algunos valores como el del 1,366e+06.
+Pero la media coincide con el pico máximo de la campana.
 
+2º Media salario, es la que más se asemeja a la campana, dado que ningún valor se excede de dicha distribución.
+
+3º Media antigüedad casas, lo más caracteríatico es el valor tan bajo de su media, como hemos podido ver hay muchos
+más valores mayores que ella.
+
+4º Media número de habitaciones, la mayoría de sus datos son más bajos que la campana, salvo uno, el 7,41 que se sale 
+de dicha distribución.
+
+5º Media número dormitorios por casa, los datos se agrupan mediante intervalos perfectamente marcados, lo cual, 
+es imposible que presente simetría y tenga algún parecido con la campana. También podemos apreciar una gran diferencia de 
+tamaño de algunas agrupaciones de datos.
+
+6º Población, el tamaño de los datos es más abundante al rededor de la media.
 
 '''
 
