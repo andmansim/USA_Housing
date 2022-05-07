@@ -103,7 +103,7 @@ def histograma(variable, media, desviacion_tipica, varianza, min, max):
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
-    plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
+    plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
 '''
 Tras ver estos histogramas podemos apreciar que algunas de las variables numéricas tienen una distribución simétrica, 
@@ -181,17 +181,22 @@ def graficas():
     df['media-antigüedad-casa'] = pd.cut(df['media-antigüedad-casa'], bins, labels = nombres)
     df2 = df.groupby('media-antigüedad-casa').mean()
     df3= df.groupby('media-antigüedad-casa').count()
-    df4 = df2[['precio', 'poblacion']]
-    print(df4)
+    df4 = df2[['precio', 'poblacion', 'media-salario']]
+    df5 = df2[['media-numero-habitaciones', 'media-numero-dormitorios-casas']]
     df3.rename(columns={'precio': 'numeroVivienda'}, inplace = True)
+    
     plt.xlabel('Número de viviendas por rango de años')
     x = df3['numeroVivienda']
     plt.pie(x, autopct="%0.1f %%", labels=nombres)
-    plt.savefig('img/Número de viviendas por rango de años' + '.png', bbox_inches='tight')
+    plt.savefig('img/Número-viviendas-por-años' + '.png', bbox_inches='tight')
     
     df4.plot(kind='bar')
     plt.title('Relación precio/población con la antigüedad casas')
-    plt.savefig('img/Relación precio/población con la antigüedad casas' + '.png', bbox_inches='tight')
+    plt.savefig('img/Relación-precio-población-con-antigüedad' + '.png', bbox_inches='tight')
+    
+    df5.plot(kind='bar')
+    plt.title('Relación habitaciones, dormitorios y salario con la antigüedad casas')
+    plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
     plt.show()
     
 
