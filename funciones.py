@@ -12,7 +12,7 @@ print('\n')
 #Vamos a traducir las columnas, es decir, vamos a cambiar sus nombres para que nos sea más fácil trabajar con ellas
 print('--------------Traducción de las columnas----------------')
 df.rename(columns= {'Price': 'precio', 'Address': 'direccion', 'Avg. Area Income': 'media salario', 'Avg. Area House Age':
-    'media antugüedad casas', 'Avg. Area Number of Rooms': 'media número habitaciones', 'Avg. Area Number of Bedrooms': 'media número dormitorios por casa', 'Area Population':'población'}, inplace=True)
+    'media antigüedad casas', 'Avg. Area Number of Rooms': 'media número habitaciones', 'Avg. Area Number of Bedrooms': 'media número dormitorios por casa', 'Area Population':'población'}, inplace=True)
 print(df.columns)
 
 print('\n')
@@ -37,7 +37,7 @@ el número de valores de cada columna y si son nulos.
 print('\n')
 print('----------Clasificación de las variables--------------')
 print('Variables categóricas: dirección')
-print('Variables numéricas: precio, media salario, media antugüedad casas, media número habitaciones,media número dormitorios por casa, población')
+print('Variables numéricas: precio, media salario, media antigüedad casas, media número habitaciones,media número dormitorios por casa, población')
 '''
 Esta clasificación la haremos basándonos en la información que nos ha dado el .info().
 Las variables categóricas son todas aquellas que no son numéricas, es decir, que nos dan una descripción mediante palabras o símbolos.
@@ -81,9 +81,9 @@ Calculamos unos datos estadísticos de cada columna para que nos facilite la com
 y nos proporcione más información
 '''
 def histograma(variable, media, desviacion_tipica, varianza):
-    min = df[[variable]].min()
-    max = df[[variable]].max()
-    x = np.arange(min, max, 100)
+    min = df[variable].min()
+    max = df[variable].max()
+    x = np.arange(min, max, 10)
     f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
     fig, ax1 = plt.subplots()
     ax1.hist(df[variable], bins= 50)
@@ -102,7 +102,7 @@ una campana de Gauss.
 
 '''
 
-numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
+numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
     media = round(calculomedia(n), 2)
     varianza = round(calculovarianza(n, media), 2)
