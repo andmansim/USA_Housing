@@ -81,32 +81,28 @@ Calculamos unos datos estadísticos de cada columna para que nos facilite la com
 y nos proporcione más información
 '''
 def histograma(variable, media, desviacion_tipica, varianza):
-    min = df[variable].min()
-    max = df[variable].max()
-    x = np.arange(min, max, 0.01)
-    f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
-    fig, ax1 = plt.subplots()
-    ax1.hist(df[variable])
-    ax2 = ax1.twinx()
-    ax2.plot(x, f, color = 'black', linestyle = 'dashed', linewidth=3)
+    fig, ax = plt.subplots()
+    ax.hist(df[variable], bins= 50)
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
     plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
-    
+'''
+Tras ver estos histogramas podemos apreciar que algunas de las variables numérica tienen una distribución simétrica, 
+es decir, se asemeja a la campana de Gauss. Los gráficos que hemos podido ver esto es en las variables: precio y 
+media salario. La media número de habitaciones y la población también tienen bastante simetría, pero no la suficiente como para considerarse 
+una campana de Gauss.
+
+'''
 
 numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
-'''for n in numericVar:
+for n in numericVar:
     media = round(calculomedia(n), 2)
     varianza = round(calculovarianza(n, media), 2)
     desviacion_tip = round((varianza**(1/2)), 2)
     print(desviacion_tip)
     print(df[n].describe())
     print('\n')
-    histograma( n, media, desviacion_tip, varianza)'''
+    histograma( n, media, desviacion_tip, varianza)
 
-media = round(calculomedia(numericVar[0]), 2)
-varianza = round(calculovarianza(numericVar[0], media), 2)
-desviacion_tip = round((varianza**(1/2)), 2)
-histograma(numericVar[0], media, desviacion_tip, varianza)
