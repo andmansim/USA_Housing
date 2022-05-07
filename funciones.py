@@ -169,49 +169,41 @@ for n in numericVar:
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, población-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
-    min = df[variable1].min()
-    max = df[variable1].max()
-    q1_v1 = np.percentile(df[variable1], 25)
-    q2_v1 = np.percentile(df[variable1], 50)
-    q3_v1 = np.percentile(df[variable1], 75)
-    q1_v2 = np.percentile(df[variable2], 25)
-    q2_v2 = np.percentile(df[variable2], 50)
-    q3_v2 = np.percentile(df[variable2], 75)
+
+    '''l = []
+    r = []
+    for e in df[variable1]:
+        l.append(e)
+    for q in df[variable2]:
+        r.append(q)
     fig, ax1 = plt.subplots()
-    l1 = []
-    l2 = []
-    l4 = []
-    l5 = []
-    r1 = []
-    r2 = []
-    r3 = []
-    r4 = []
-    for i in df[variable1]:
-        if i < q1_v1:
-            l1.append(i)
-        if q1_v1 < i <  q2_v1:
-            l2.append(i)
-        if   q2_v1 < i < q3_v1:
-            l4.append(i)
-        if i> q3_v1:
-            l5.append(i)
-    for j in df[variable2]:
-        if i < q1_v2:
-            r1.append(j)
-        if q1_v2 < i <  q2_v2:
-            r2.append(j)
-        if   q2_v2 < i < q3_v2:
-            r3.append(j)
-        if j> q3_v2:
-            r4.append(j)
-    #ax1.plot(l1[0:len(l1):1000] + l2[0:len(l2):1000] + l4[0:len(l4):1000] + l5[0:len(l5):1000], color='yellow', linewidth=3)
-    ax1.plot(df[variable1][min:max:1000], color='yellow', linewidth=3)
-    ax1.set_ylabel('precio', color= 'yellow')
+    
+    ax1.plot(l[0:len(l):200], color='orange', linewidth=3)
+    ax1.set_ylabel(variable1, color= 'orange')
     ax2 = ax1.twinx()
-    ax2.plot(r1[0:len(r1):200] + r2[0:len(r2):200] + r3[0:len(r3):200] + r4[0:len(r4):200], color='blue', linewidth=3 )
-    ax2.set_ylabel('media antigüedad casas', color= 'blue')
+    
+    ax2.plot(r[0:len(r):200], color='blue', linewidth=3 )
+    ax2.set_ylabel(variable2, color= 'blue')
     plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
     plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
-    plt.show()
-    
-graficas('precio', 'media antigüedad casas')
+    plt.show()'''
+    '''fig, ax= plt.subplots()
+    ax.scatter(df[variable2], df[variable1])
+    ax.set_ylabel(variable1)
+    ax.set_xlabel(variable2)
+    plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
+    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
+    plt.show()'''
+fig, ax1 = plt.subplots()
+a = df[["población", "precio"]].groupby(["población"], as_index = False).mean().sort_values(by="precio",ascending = False)   
+#plt.hist(a) 
+
+ax1.hist(df["media antigüedad casas"])
+ax2 = ax1.twinx()
+ax2.hist(df["precio"], color='orange')
+
+plt.show()
+
+#graficas('precio', 'media antigüedad casas')
+#graficas('precio', 'media número habitaciones')
+#graficas('población', 'precio')
