@@ -76,41 +76,7 @@ def calculomedia(variable):
 def calculovarianza(variable, media):
     v = ((df[variable] - media)**2).sum()/(df[variable].count())
     return v
-def calculomediana(variable):
-    centro = df[variable].count()/2
-    ordenar =  df[variable].sort_values() 
-    print(ordenar)
-    par = False
-    if (df[variable].count() % 2==0):
-        par = True
-    if par:
-        centro = int(round(centro, 0))
-        valor1 = ordenar.iloc[centro, 0]
-        valor2 = ordenar.iloc[centro - 1, 0]
-        mediana = (valor1 + valor2)/2
-    else: 
-        posi_mediana = int((ordenar[variable].count() + 1)/2)
-        mediana = ordenar.iloc[posi_mediana - 1, 0]
-    return mediana
-    
-def calculocuartiles(variable, mediana):
-    ordenar = df[variable].sort_values() 
-    q2 = mediana
-    par = False
-    if (ordenar[variable].count()%2 ==0):
-        par = True
-    if par:
-        q1 = int(ordenar[variable].count()/4)
-        q3 = int((ordenar[variable].count() * 3)/ 4)
-    else:
-        q1 = int((ordenar[variable].count() + 1)/4)
-        q3 = int(((ordenar[variable].count()+ 1) * 3)/ 4) 
-    
-    Q1 = ordenar.iloc[q1 - 1, 0]
-    Q3 = ordenar.iloc[q3 - 1, 0]
 
-    return [Q1, q2, Q3]
-        
 '''
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
 y nos proporcione más información
@@ -134,31 +100,36 @@ def histograma(variable, media, desviacion_tipica, varianza):
     plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
 '''
-Tras ver estos histogramas podemos apreciar que algunas de las variables numérica tienen una distribución simétrica, 
-es decir, se asemeja a la campana de Gauss. Los gráficos que hemos podido ver esto es en la variable media salario.
+Tras ver estos histogramas podemos apreciar que algunas de las variables numéricas tienen una distribución simétrica, 
+es decir, se asemejan a la campana de Gauss. El gráfico en el que hemos podido ver esto, es el de la media salario.
 El resto de valores, salvo la media antigüedad casas y media número dormitorios por casa, presenta simetría pero no 
 la suficiente como para llegar a considerarse una campana de Gauss.
+Con todo esto podemos apreciar que según van avanzando los datos cada vez hay menos repeticiones. 
 
 Ahora vamos a analizar las variables de manera individual, viendo algunas caracteríaticas de ellas:
-1º Precio: Su distribución encaja con la campana de Gauss, salvo algunos valores como el del 1,366e+06.
-Pero la media coincide con el pico máximo de la campana.
 
-2º Media salario, es la que más se asemeja a la campana, dado que ningún valor se excede de dicha distribución.
 
-3º Media antigüedad casas, lo más caracteríatico es el valor tan bajo de su media, como hemos podido ver hay muchos
-más valores mayores que ella.
+1º Precio: Su distribución encaja con la campana de Gauss, es decir, la mayoría del precio del mercado suele mantenerse estandar, 
+para que sea más o menos asequible para todos los usuarios. 
 
-4º Media número de habitaciones, la mayoría de sus datos son más bajos que la campana, salvo uno, el 7,41 que se sale 
-de dicha distribución.
+
+2º Media salario, es la que más se asemeja a la campana, dado que ningún valor se excede de dicha distribución. Por tanto, pasa 
+algo parecido al precio.
+
+
+3º Media antigüedad casas, la mayoría de las casas rondan por los 5 o 7 años, auqnue tuvo una bajada hace 6 años.
+
+
+4º Media número de habitaciones, la media ronda por las 7 habitaciones por casa, pero algunas casas llegan a tener 8 habitaciones. 
+
 
 5º Media número dormitorios por casa, los datos se agrupan mediante intervalos perfectamente marcados, lo cual, 
-es imposible que presente simetría y tenga algún parecido con la campana. También podemos apreciar una gran diferencia de 
-tamaño de algunas agrupaciones de datos.
+es imposible que presente simetría y tenga algún parecido con la campana. También podemos apreciar que la gran mayoría de casas
+contienen 2 o 3 dormitorios.
 
-6º Población, el tamaño de los datos es más abundante al rededor de la media.
+6º Población, la media de personas que viven en un área es de 40000.
 
 '''
-
 
 #valores atípicos
 def criterioDeTukey(variable, primerCuartil, tercerCuartil):
@@ -167,7 +138,6 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
     valoresAberrantesSuperiores = []
     ordenar =df[variable].sort_values()
     intercuartil = tercerCuartil - primerCuartil
-    print("Inter-cuartil = "+str(intercuartil))
     limiteInferior = primerCuartil - (1.5 * intercuartil)
     limiteSuperior = tercerCuartil + (1.5 * intercuartil)
 
@@ -187,9 +157,10 @@ for n in numericVar:
     media = round(calculomedia(n), 2)
     varianza = round(calculovarianza(n, media), 2)
     desviacion_tip = round((varianza**(1/2)), 2)
-    mediana = round(calculomediana(n), 2)
-    cuartil = calculocuartiles(n, mediana)
-    atipicos = criterioDeTukey(n, cuartil[0], cuartil[2])
+    q1 = np.percentile(df[n], 25)
+    q2 = np.percentile(df[n], 50)
+    q3 = np.percentile(df[n], 75)
+    atipicos = criterioDeTukey(n, q1, q3)
     histograma( n, media, desviacion_tip, varianza)
     
     
