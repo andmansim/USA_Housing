@@ -84,7 +84,10 @@ y nos proporcione más información
 print('-----------Identificar valores nulos-----------')
 nulos = df.isnull().sum()
 print(nulos)
+print('\n')
 
+#Representación de cada variable numérica
+print('------------Análisis de las variables numérica----------------')
 def histograma(variable, media, desviacion_tipica, varianza, min, max):
 
     if media < 10:
@@ -156,7 +159,7 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
     return (valoresAberrantes)
 
 
-numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
+'''numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
 for n in numericVar:
     min = df[n].min()
     max = df[n].max()
@@ -169,10 +172,11 @@ for n in numericVar:
     atipicos = criterioDeTukey(n, q1, q3)
     #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
     print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
-    histograma( n, media, desviacion_tip, varianza, min, max)
+    histograma( n, media, desviacion_tip, varianza, min, max)'''
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, poblacion-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
     pass
+
 
 
