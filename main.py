@@ -252,6 +252,7 @@ for p in grafica:
     x, y = p.get_xy()
     plt.text(x + width/2, y + height *1.01, str(df3.incrementoAnual[w] + '%', ha = 'center', weight = 'bold'))
     i = i + 1
+plt.tittle('Incremento de viviendas por año')
 plt.save_fig('/img/IncrementoAño' + '.png', bbox_inches='tight')   
 plt.show()
 
