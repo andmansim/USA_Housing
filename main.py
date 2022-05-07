@@ -115,6 +115,15 @@ if __name__ =='__main__':
         '''
     
     
-    print('\n')
-    graficas(df)
     
+    graficas(df)
+    '''
+    En estos gráficos agrupamos las casas por años de antigüedad e iremos comparandolos con las distintas variables
+    para obtener información. 
+    En el primer gráfico vemos el número de casas por año, mediante un diagrama de sectores, podemos apreciar que hay
+    muchas menos casas antigüas que nuevas.
+    En el segundo podemos ver que hay un mayor número de habitaciones en las casas más nuevas, lo mismo pasa con el 
+    número de dormitorios, aunque la diferencia no es tan grande. 
+    Por último, en el tercero tenemos una situación completamente opuesta, se puede apreciar una gran diferencia de 
+    precio según avanzan los años, en cambio, el salario y la población se mantienen más o menos constantes.
+    '''

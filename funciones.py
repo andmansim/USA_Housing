@@ -81,7 +81,6 @@ se usará en este fichero.
 '''
 
 def calculomedia(df, variable):
-    print(df[variable])
     m =  (df[variable].sum())/(df[variable].count())
     return m
 
@@ -112,6 +111,7 @@ def histograma(df, variable, media, desviacion_tipica, varianza, min, max):
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
     plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
+    plt.show()
 
 
 #valores atípicos
@@ -146,7 +146,7 @@ def graficas(df):
     df4 = df2[['precio', 'poblacion', 'media-salario']]
     df5 = df2[['media-numero-habitaciones', 'media-numero-dormitorios-casas']]
     df3.rename(columns={'precio': 'numeroVivienda'}, inplace = True)
-    
+    plt.subplots()
     plt.xlabel('Número de viviendas por rango de años')
     x = df3['numeroVivienda']
     plt.pie(x, autopct="%0.1f %%", labels=nombres)
@@ -159,4 +159,4 @@ def graficas(df):
     df5.plot(kind='bar')
     plt.title('Relación habitaciones, dormitorios y salario con la antigüedad casas')
     plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
-
+    plt.show()
