@@ -100,9 +100,11 @@ def histograma(variable, media, desviacion_tipica, varianza):
     plt.show()
 '''
 Tras ver estos histogramas podemos apreciar que algunas de las variables numérica tienen una distribución simétrica, 
-es decir, se asemeja a la campana de Gauss. Los gráficos que hemos podido ver esto es en las variables: precio y 
-media salario. La media número de habitaciones y la población también tienen bastante simetría, pero no la suficiente como para considerarse 
-una campana de Gauss.
+es decir, se asemeja a la campana de Gauss. Los gráficos que hemos podido ver esto es en la variable media salario.
+El resto de valores, salvo la media antigüedad casas y media número dormitorios por casa, presenta simetría pero no 
+la suficiente como para llegar a considerarse una campana de Gauss.
+
+
 
 '''
 
