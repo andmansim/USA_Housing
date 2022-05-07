@@ -168,8 +168,29 @@ for n in numericVar:
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, población-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
+    q1_v1 = np.percentile(df[variable1], 25)
+    q2_v1 = np.percentile(df[variable1], 50)
+    q3_v1 = np.percentile(df[variable1], 75)
     fig, ax1 = plt.subplots()
-    ax1.pie(df[variable1], df[variable2] )
+    l1 = []
+    l2 = []
+    l4 = []
+    l5 = []
+    for i in df[variable1]:
+        if i < q1:
+            l1.append(i)
+        if q1 < i < media:
+            l2.append(i)
+        if  q2 < i < q3:
+            l4.append(i)
+        if i> q3:
+            l5.append(i)
+    print(l1)
+    print(l2)
+    
+    ax1.plot(l1, color='black', linewidth=3)
+    #ax2 = ax1.twinx()
+    #ax2.plot(df[variable2], color='red', linewidth=3 )
     plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
     plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
     plt.show()
