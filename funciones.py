@@ -72,15 +72,23 @@ print('\n')
 def calculomedia(variable):
     m =  df[variable].sum()/df[variable].count()
     return m
+
+def calculovarianza(variable, media):
+    v = ((df[variable] - media)**2).sum()/(df[variable].count())
+    return v
 '''
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
 y nos proporcione más información
 '''
 def histograma(variable, media, desviacion_tipica, varianza):
+    min = df[variable].min()
+    max = df[variable].max()
     x = np.arange(min, max, 0.01)
     f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
-    fig, ax = plt.subplots()
-    ax.hist(df[variable])
+    fig, ax1 = plt.subplots()
+    ax1.hist(df[variable])
+    ax2 = ax1.twinx()
+    ax2.plot(x, f, color = 'black', linestyle = 'dashed', linewidth=3)
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
@@ -91,8 +99,10 @@ def histograma(variable, media, desviacion_tipica, varianza):
 '''
 numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
-    media = calculomedia(n)
-    print(media)
+    media = round(calculomedia(n), 2)
+    varianza = round(calculovarianza(n, media), 2)
+    desviacion_tip = round((varianza**(1/2)), 2)
+    print(desviacion_tip)
     print(df[n].describe())
     print('\n')
-    histograma( n, media)
+    histograma( n, media, desviacion_tip, varianza)
