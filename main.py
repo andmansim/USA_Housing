@@ -168,8 +168,6 @@ def graficas(df):
     plt.title('Relación habitaciones, dormitorios y salario con la antigüedad casas')
     #plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
     
-    
-    df5.plot(kind= 'bar', stacked = True, alpha= 0.4, width= 0.9, figsize=(9,4))
     plt.show()
 
 '''
@@ -224,9 +222,8 @@ for n in numericVar:
     6º poblacion, la media de personas que viven en un área es de 40000.
 
     '''
-    
-    
-    
+     
+#Comparando varios datos  
 graficas(df)
 '''
 En estos gráficos agrupamos las casas por años de antigüedad e iremos comparandolos con las distintas variables
@@ -238,4 +235,27 @@ número de dormitorios, aunque la diferencia no es tan grande.
 Por último, en el tercero tenemos una situación completamente opuesta, se puede apreciar una gran diferencia de 
 precio según avanzan los años, en cambio, el salario y la población se mantienen más o menos constantes.
 '''
-'''![nombre](/img/Histograma-de-media-antigüedad-casa.png)'''
+#Incremento del número de viviendas por año
+bins=[2, 3, 4, 5, 6, 7, 8, 9, 10]
+nombre= ['2','3', '4', '5', '6', '7', '8', '9', '10']
+
+df['media-antigüedad-casa'] = pd.cut(df['media-antigüedad-casa'], bins, labels = nombre)
+df2 = df.groupby('media-antigüedad-casa').mean()
+df3= df.groupby('media-antigüedad-casa').count()
+df3.rename(columns={'precio': 'numeroVivienda'}, inplace = True)
+df3['incrementoAnual'] = round(df3.numeroviviendas.pct_change() * 100, 2)
+grafica = plt.bar(df3.index, df3['incrementoAnual'])
+w = 0
+for p in grafica:
+    width= p.get_width()
+    height = p.get_height()
+    x, y = p.get_xy()
+    plt.text(x + width/2, y + height *1.01, str(df3.incrementoAnual[w] + '%', ha = 'center', weight = 'bold'))
+    i = i + 1
+plt.save_fig('/img/IncrementoAño' + '.png', bbox_inches='tight')   
+plt.show()
+
+'''
+En esta gráfica vemos el grán número de viviendas que hubo hace 3 años, porteriormente ha ido decreciendo, hasta 
+llegar a valores negativos.
+'''
