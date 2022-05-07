@@ -175,8 +175,25 @@ for n in numericVar:
     histograma( n, media, desviacion_tip, varianza, min, max)'''
     
 #comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, poblacion-precio, habitaciones-dormitorios
-def graficas(variable1, variable2):
-    pass
+def graficas():
+    bins = [2, 4, 6, 8, 10]
+    nombres = ['2-4', '4-6', '6-8', '8-10']
+    df['media-antigüedad-casa'] = pd.cut(df['media-antigüedad-casa'], bins, labels = nombres)
+    df2 = df.groupby('media-antigüedad-casa').mean()
+    df3= df.groupby('media-antigüedad-casa').count()
+    df4 = df2[['precio', 'poblacion']]
+    print(df4)
+    df3.rename(columns={'precio': 'numeroVivienda'}, inplace = True)
+    plt.xlabel('Número de viviendas por rango de años')
+    x = df3['numeroVivienda']
+    plt.pie(x, autopct="%0.1f %%", labels=nombres)
+    plt.savefig('img/Número de viviendas por rango de años' + '.png', bbox_inches='tight')
+    
+    df4.plot(kind='bar')
+    plt.title('Relación precio/población con la antigüedad casas')
+    plt.savefig('img/Relación precio/población con la antigüedad casas' + '.png', bbox_inches='tight')
+    plt.show()
+    
 
 
-
+graficas()
