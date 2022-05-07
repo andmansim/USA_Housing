@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 #Leemos el csv
 df = pd.read_csv('USA_Housing.csv', delimiter = ',', encoding='UTF-8')
@@ -68,22 +68,17 @@ se usará en este fichero.
 '''
 
 print('\n')
-print('------------Análisis de las variables numéricas----------------')
-#Agrupamos las varibles para saber si hay algún dato repetido
-def diagrama_barras(variable):
-    plt.figure(figsize = (9,3))
-    plt.hist(df[variable], bins=30) #Histograma
-    plt.xlabel(variable)
-    plt.ylabel("Frecuencia")
-    plt.title("Distribución variable {} con histograma".format(variable))
-    plt.show()
-
-
 
 def calculomedia(variable):
     m =  df[variable].sum()/df[variable].count()
     return m
-def histograma(variable, media):
+'''
+Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
+y nos proporcione más información
+'''
+def histograma(variable, media, desviacion_tipica, varianza):
+    x = np.arange(min, max, 0.01)
+    f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
     fig, ax = plt.subplots()
     ax.hist(df[variable])
     plt.title('Histograma de {}'.format(variable))
@@ -91,7 +86,9 @@ def histograma(variable, media):
     plt.legend(loc='upper right')
     plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
-    
+'''
+
+'''
 numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
     media = calculomedia(n)
