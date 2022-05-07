@@ -92,11 +92,9 @@ def histograma(variable, media, desviacion_tipica, varianza):
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
-    plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
+    #plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
-'''
 
-'''
 numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
     media = round(calculomedia(n), 2)
