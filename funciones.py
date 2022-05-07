@@ -11,8 +11,8 @@ print('\n')
 
 #Vamos a traducir las columnas, es decir, vamos a cambiar sus nombres para que nos sea más fácil trabajar con ellas
 print('--------------Traducción de las columnas----------------')
-df.rename(columns= {'Price': 'precio', 'Address': 'direccion', 'Avg. Area Income': 'media salario', 'Avg. Area House Age':
-    'media antigüedad casas', 'Avg. Area Number of Rooms': 'media número habitaciones', 'Avg. Area Number of Bedrooms': 'media número dormitorios por casa', 'Area Population':'población'}, inplace=True)
+df.rename(columns= {'Price': 'precio', 'Address': 'direccion', 'Avg. Area Income': 'media-salario', 'Avg. Area House Age':
+    'media-antigüedad-casa', 'Avg. Area Number of Rooms': 'media-numero-habitaciones', 'Avg. Area Number of Bedrooms': 'media-numero-dormitorios-casas', 'Area Population':'poblacion'}, inplace=True)
 print(df.columns)
 
 print('\n')
@@ -37,7 +37,7 @@ el número de valores de cada columna y si son nulos.
 print('\n')
 print('----------Clasificación de las variables--------------')
 print('Variables categóricas: dirección')
-print('Variables numéricas: precio, media salario, media antigüedad casas, media número habitaciones,media número dormitorios por casa, población')
+print('Variables numéricas: precio, media-salario, media-antigüedad-casa, media-numero-habitaciones,media-numero-dormitorios-casas, poblacion')
 '''
 Esta clasificación la haremos basándonos en la información que nos ha dado el .info().
 Las variables categóricas son todas aquellas que no son numéricas, es decir, que nos dan una descripción mediante palabras o símbolos.
@@ -100,8 +100,8 @@ def histograma(variable, media, desviacion_tipica, varianza, min, max):
     plt.show()
 '''
 Tras ver estos histogramas podemos apreciar que algunas de las variables numéricas tienen una distribución simétrica, 
-es decir, se asemejan a la campana de Gauss. El gráfico en el que hemos podido ver esto, es el de la media salario.
-El resto de valores, salvo la media antigüedad casas y media número dormitorios por casa, presenta simetría pero no 
+es decir, se asemejan a la campana de Gauss. El gráfico en el que hemos podido ver esto, es el de la media-salario.
+El resto de valores, salvo la media-antigüedad-casa y media-numero-dormitorios-casas, presenta simetría pero no 
 la suficiente como para llegar a considerarse una campana de Gauss.
 Con todo esto podemos apreciar que según van avanzando los datos cada vez hay menos repeticiones. 
 
@@ -109,24 +109,24 @@ Ahora vamos a analizar las variables de manera individual, viendo algunas caract
 
 
 1º Precio: Su distribución encaja con la campana de Gauss, es decir, la mayoría del precio del mercado suele mantenerse estandar, 
-para que sea más o menos asequible para todos los usuarios. 
+para que sea más o menos asequible para todos los usuarios. Su media es de 1 millón de euros.
 
 
-2º Media salario, es la que más se asemeja a la campana, dado que ningún valor se excede de dicha distribución. Por tanto, pasa 
-algo parecido al precio.
+2º Media-salario, es la que más se asemeja a la campana, dado que ningún valor se excede de dicha distribución. Por tanto, pasa 
+algo parecido al precio. La mayoría tiene 68 mil euros.
 
 
-3º Media antigüedad casas, la mayoría de las casas rondan por los 5 o 7 años, auqnue tuvo una bajada hace 6 años.
+3º media-antigüedad-casa, la mayoría de las casas rondan por los 5 o 7 años, auqnue tuvo una bajada hace 6 años.
 
 
 4º Media número de habitaciones, la media ronda por las 7 habitaciones por casa, pero algunas casas llegan a tener 8 habitaciones. 
 
 
-5º Media número dormitorios por casa, los datos se agrupan mediante intervalos perfectamente marcados, lo cual, 
+5º media-numero-dormitorios-casas, los datos se agrupan mediante intervalos perfectamente marcados, lo cual, 
 es imposible que presente simetría y tenga algún parecido con la campana. También podemos apreciar que la gran mayoría de casas
 contienen 2 o 3 dormitorios.
 
-6º Población, la media de personas que viven en un área es de 40000.
+6º poblacion, la media de personas que viven en un área es de 40000.
 
 '''
 
@@ -152,7 +152,7 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
     return (valoresAberrantes)
 
 
-numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
+numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
 for n in numericVar:
     min = df[n].min()
     max = df[n].max()
@@ -163,11 +163,13 @@ for n in numericVar:
     q2 = np.percentile(df[n], 50)
     q3 = np.percentile(df[n], 75)
     atipicos = criterioDeTukey(n, q1, q3)
+    print(n)
+    print(df[n].describe())
     #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
     print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
-    #histograma( n, media, desviacion_tip, varianza, min, max)
+    histograma( n, media, desviacion_tip, varianza, min, max)
     
-#comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, población-precio, habitaciones-dormitorios
+#comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, poblacion-precio, habitaciones-dormitorios
 def graficas(variable1, variable2):
 
     '''l = []
@@ -192,18 +194,8 @@ def graficas(variable1, variable2):
     ax.set_ylabel(variable1)
     ax.set_xlabel(variable2)
     plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
-    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
-    plt.show()'''
-fig, ax1 = plt.subplots()
-a = df[["población", "precio"]].groupby(["población"], as_index = False).mean().sort_values(by="precio",ascending = False)   
-#plt.hist(a) 
+    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')'''
 
-ax1.hist(df["media antigüedad casas"])
-ax2 = ax1.twinx()
-ax2.hist(df["precio"], color='orange')
-
-plt.show()
-
-#graficas('precio', 'media antigüedad casas')
-#graficas('precio', 'media número habitaciones')
-#graficas('población', 'precio')
+#graficas('precio', 'media-antigüedad-casa')
+#graficas('precio', 'media-numero-habitaciones')
+#graficas('poblacion', 'precio')
