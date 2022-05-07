@@ -81,8 +81,14 @@ Calculamos unos datos estadísticos de cada columna para que nos facilite la com
 y nos proporcione más información
 '''
 def histograma(variable, media, desviacion_tipica, varianza):
-    fig, ax = plt.subplots()
-    ax.hist(df[variable], bins= 50)
+    min = df[[variable]].min()
+    max = df[[variable]].max()
+    x = np.arange(min, max, 100)
+    f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
+    fig, ax1 = plt.subplots()
+    ax1.hist(df[variable], bins= 50)
+    ax2 = ax1.twinx()
+    ax2.plot(x, f, color = 'black', linestyle = 'dashed', linewidth=3)
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
