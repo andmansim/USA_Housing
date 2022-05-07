@@ -60,6 +60,9 @@ print('-----------Identificar valores nulos-----------')
 nulos = df.isnull().sum()
 print(nulos)
 print('\n')
+'''
+No hay ningún valor nulo.
+'''
 
 def bar_plt(df, variable):
     var = df[variable]
@@ -90,11 +93,10 @@ def calculovarianza(df, variable, media):
 
 '''
 Calculamos unos datos estadísticos de cada columna para que nos facilite la comparación entre los datos 
-y nos proporcione más información
+y nos proporcione más información.
 '''
 
 #Representación de cada variable numérica
-'''print('------------Análisis de las variables numérica----------------')'''
 def histograma(df, variable, media, desviacion_tipica, varianza, min, max):
 
     if media < 10:
@@ -113,7 +115,9 @@ def histograma(df, variable, media, desviacion_tipica, varianza, min, max):
     #plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
 
-
+'''
+Nos muesta distintas gráficas donde las analizaremos. Se explica más adelante, cuando se llama a la función.
+'''
 #valores atípicos
 def criterioDeTukey(df, variable, primerCuartil, tercerCuartil):
     
@@ -135,8 +139,12 @@ def criterioDeTukey(df, variable, primerCuartil, tercerCuartil):
 
     return (valoresAberrantes)
 
-    
-#comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, poblacion-precio, habitaciones-dormitorios
+'''
+Esta función seguirá en criterio de Turkey para ver que valores son atípicos, es decir, cuales se alejan demasiado de 
+la media. Para ello, calcularemos los cuartiles y veremos su rango para después calcular el límite inferior y superior. 
+Cualquier valor que se salga de estos límites se considerará atípico.
+'''
+
 def graficas(df):
     bins = [2, 4, 6, 8, 10]
     nombres = ['2-4', '4-6', '6-8', '8-10']
@@ -164,10 +172,12 @@ def graficas(df):
     df5.plot(kind= 'bar', stacked = True, alpha= 0.4, width= 0.9, figsize=(9,4))
     plt.show()
 
+'''
+Muestra unos gráficos, cuya conclusión se explica más adelante, cuando se llama a la función.
+'''
+
 numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
 print('------------Análisis de las variables numéricas----------------')
-    
-    
     
 for n in numericVar:
     min = df[n].min()
