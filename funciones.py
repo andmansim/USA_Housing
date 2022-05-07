@@ -87,7 +87,7 @@ def histograma(variable, media, desviacion_tipica, varianza):
         a = 0.01
     else:
         a = 1
-    x = np.arange(min, max, a)
+    x = np.arange(min, max + a, a)
     f = 1/(desviacion_tipica * np.sqrt(2*np.pi)) * np.exp(-(x - media) ** 2/(2 * varianza))
     fig, ax1 = plt.subplots()
     ax1.hist(df[variable], bins= 50)
