@@ -16,14 +16,20 @@ if __name__ =='__main__':
 
     print('\n')
     print('------------Datos del csv-------------')
-    print(df.head()) 
+    print('Primeras filas')
+    print(df.head())
+    print('\n') 
+    print('Últimas filas')
     print(df.tail())
     '''Se usa para poder ver las primeras filas de nuestros datos y ver los distintos valores que tenemos asociados a las columnas. 
     Lo mismo con el .tail(), lo único que nos mostrará las últimas filas. Podemos usar ambos para ver los datos, aunque es más común el .head()'''
 
     print('\n')
     print('----------Descripción e información del csv----------------')
+    print('Descripción:')
     print(df.describe())
+    print('\n')
+    print('Información datos')
     print(df.info())
     '''
     El .describe(), no enseña en una columna los datos más relevantes que necesitamos saber sobre este DataSet, incluye 
@@ -55,6 +61,7 @@ if __name__ =='__main__':
     print('\n')
     
     numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
+    print('------------Análisis de las variables numéricas----------------')
     for n in numericVar:
         min = df[n].min()
         max = df[n].max()
@@ -69,7 +76,6 @@ if __name__ =='__main__':
         #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
         print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
         
-        print('------------Análisis de las variables numérica----------------')
         histograma( df, n, media, desviacion_tip, varianza, min, max)
         '''
         Tras ver estos histogramas podemos apreciar que algunas de las variables numéricas tienen una distribución simétrica, 

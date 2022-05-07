@@ -57,7 +57,6 @@ def histograma(df, variable, media, desviacion_tipica, varianza, min, max):
     plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
 
 
-
 #valores atípicos
 def criterioDeTukey(df, variable, primerCuartil, tercerCuartil):
     
@@ -104,24 +103,3 @@ def graficas(df):
     plt.title('Relación habitaciones, dormitorios y salario con la antigüedad casas')
     plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
     
-    
-
-
-
-
-
-
-'''numericVar = ['precio', 'media-salario', 'media-antigüedad-casa', 'media-numero-habitaciones','media-numero-dormitorios-casas', 'poblacion']
-for n in numericVar:
-    min = df[n].min()
-    max = df[n].max()
-    media = round(calculomedia(n), 2)
-    varianza = round(calculovarianza(n, media), 2)
-    desviacion_tip = round((varianza**(1/2)), 2)
-    q1 = np.percentile(df[n], 25)
-    q2 = np.percentile(df[n], 50)
-    q3 = np.percentile(df[n], 75)
-    atipicos = criterioDeTukey(n, q1, q3)
-    #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
-    print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
-    histograma( n, media, desviacion_tip, varianza, min, max)'''
