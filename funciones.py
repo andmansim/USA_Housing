@@ -164,6 +164,14 @@ for n in numericVar:
     atipicos = criterioDeTukey(n, q1, q3)
     #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
     print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
-    histograma( n, media, desviacion_tip, varianza)
+    #histograma( n, media, desviacion_tip, varianza)
     
+#comparamos: precio-antigüedad, precio-habitaciones, direccion-poblacion, población-precio, habitaciones-dormitorios
+def graficas(variable1, variable2):
+    fig, ax1 = plt.subplots()
+    ax1.pie(df[variable1], df[variable2] )
+    plt.title('Gráfica de {}'.format(variable1) + ' y {}'.format(variable2))
+    plt.savefig('img/Gráfica de {}'.format(variable1) + ' y {}'.format(variable2) + '.png', bbox_inches='tight')
+    plt.show()
     
+graficas('precio', 'media antigüedad casas')
