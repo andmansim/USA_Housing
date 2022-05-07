@@ -134,3 +134,25 @@ for n in numericVar:
     print('\n')
     histograma( n, media, desviacion_tip, varianza)
 
+
+#valores atípicos
+def criterioDeTukey(variable, primerCuartil, tercerCuartil):
+    
+    valoresAberrantesInferiores = []
+    valoresAberrantesSuperiores = []
+    ordenar =df[variable].sort_values()
+    intercuartil = tercerCuartil - primerCuartil
+    print("Inter-cuartil = "+str(intercuartil))
+    limiteInferior = primerCuartil - (1.5 * intercuartil)
+    limiteSuperior = tercerCuartil + (1.5 * intercuartil)
+
+    for valorObservacion in ordenar:
+        if valorObservacion < limiteInferior:
+            valoresAberrantesInferiores.append(valorObservacion)
+
+        if valorObservacion > limiteSuperior:
+            valoresAberrantesSuperiores.append(valorObservacion)
+
+    valoresAberrantes = valoresAberrantesInferiores + valoresAberrantesSuperiores
+
+    return (valoresAberrantes)
