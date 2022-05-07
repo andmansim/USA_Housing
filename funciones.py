@@ -152,6 +152,7 @@ def criterioDeTukey(variable, primerCuartil, tercerCuartil):
 
     return (valoresAberrantes)
 
+
 numericVar = ['precio', 'media salario', 'media antigüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
     media = round(calculomedia(n), 2)
@@ -161,6 +162,8 @@ for n in numericVar:
     q2 = np.percentile(df[n], 50)
     q3 = np.percentile(df[n], 75)
     atipicos = criterioDeTukey(n, q1, q3)
+    #Enseñamos aquellos valores que hacen que nuestra distribución varie tanto
+    print('Los valores atípicos de {}'.format(n) + ' son: ' + str(len(atipicos)) + '\n')
     histograma( n, media, desviacion_tip, varianza)
     
     
