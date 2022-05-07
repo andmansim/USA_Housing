@@ -110,7 +110,7 @@ def histograma(df, variable, media, desviacion_tipica, varianza, min, max):
     plt.title('Histograma de {}'.format(variable))
     plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
     plt.legend(loc='upper right')
-    plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
+    #plt.savefig('img/Histograma-de-{}'.format(variable) + '.png', bbox_inches='tight')
     plt.show()
 
 
@@ -150,15 +150,15 @@ def graficas(df):
     plt.xlabel('Número de viviendas por rango de años')
     x = df3['numeroVivienda']
     plt.pie(x, autopct="%0.1f %%", labels=nombres)
-    plt.savefig('img/Número-viviendas-por-años' + '.png', bbox_inches='tight')
+    #plt.savefig('img/Número-viviendas-por-años' + '.png', bbox_inches='tight')
     
     df4.plot(kind='bar')
     plt.title('Relación precio/población con la antigüedad casas')
-    plt.savefig('img/Relación-precio-población-con-antigüedad' + '.png', bbox_inches='tight')
+    #plt.savefig('img/Relación-precio-población-con-antigüedad' + '.png', bbox_inches='tight')
     
     df5.plot(kind='bar')
     plt.title('Relación habitaciones, dormitorios y salario con la antigüedad casas')
-    plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
+    #plt.savefig('img/Relación-habitaciones-dormitorios-salario-con-antigüedad' + '.png', bbox_inches='tight')
     
     
     df5.plot(kind= 'bar', stacked = True, alpha= 0.4, width= 0.9, figsize=(9,4))
@@ -228,4 +228,4 @@ número de dormitorios, aunque la diferencia no es tan grande.
 Por último, en el tercero tenemos una situación completamente opuesta, se puede apreciar una gran diferencia de 
 precio según avanzan los años, en cambio, el salario y la población se mantienen más o menos constantes.
 '''
-
+'''![nombre](/img/Histograma-de-media-antigüedad-casa.png)'''
