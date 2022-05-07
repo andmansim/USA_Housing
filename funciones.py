@@ -70,7 +70,7 @@ se usará en este fichero.
 print('\n')
 print('------------Análisis de las variables numéricas----------------')
 #Agrupamos las varibles para saber si hay algún dato repetido
-def plot_hist(variable):
+def diagrama_barras(variable):
     plt.figure(figsize = (9,3))
     plt.hist(df[variable], bins=30) #Histograma
     plt.xlabel(variable)
@@ -78,7 +78,24 @@ def plot_hist(variable):
     plt.title("Distribución variable {} con histograma".format(variable))
     plt.show()
 
+
+
+def calculomedia(variable):
+    m =  df[variable].sum()/df[variable].count()
+    return m
+def histograma(variable, media):
+    fig, ax = plt.subplots()
+    ax.hist(df[variable])
+    plt.title('Histograma de {}'.format(variable))
+    plt.axvline(media, color='red', linestyle='dashed', linewidth=1,label = str(media))
+    plt.legend(loc='upper right')
+    plt.savefig('img/Histograma de {}'.format(variable) + '.png', bbox_inches='tight')
+    plt.show()
+    
 numericVar = ['precio', 'media salario', 'media antugüedad casas', 'media número habitaciones','media número dormitorios por casa', 'población']
 for n in numericVar:
-  plot_hist(n)
-  
+    media = calculomedia(n)
+    print(media)
+    print(df[n].describe())
+    print('\n')
+    histograma( n, media)
